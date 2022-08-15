@@ -14,6 +14,6 @@ const db=mysql.createConnection({
     password:'Sudheer@123'
 
 },
-console.log(`connected to database`)
+console.log(`conected to database`)
 );
 
