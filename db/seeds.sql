@@ -16,7 +16,6 @@ values
 ('sales lead',2000,3),
 ('engineering manager',2500,4),
 ('electrical engineer',2000,4);
-
 insert into employee(first_name,last_name,roles_id,manager_id)
 values
 ('narender','kandula',4,null),
