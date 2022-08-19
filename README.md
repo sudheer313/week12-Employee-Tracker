@@ -16,7 +16,7 @@ SO THAT I can organize and plan my business
 
 The following video shows how my application works:
 
-[![A video thumbnail shows the command-line employee management application with a play button overlaying the view.](./Assets/12-sql-homework-video-thumbnail.png)](https://2u-20.wistia.com/medias/2lnle7xnpk)
+[![video link](https://drive.google.com/file/d/1fvHbONKP5S87wJKaiWLiR9GxVcJLbEe1/view)
 
 ### Required Dependencies
 
@@ -37,6 +37,12 @@ The following video shows how my application works:
     * Uses the [MySQL2 package](https://www.npmjs.com/package/mysql2) to connect to a MySQL database.
 
     * Uses the [console.table package](https://www.npmjs.com/package/console.table) to print MySQL rows to the console.
+
+    
+## Deployment
+[Github repo] sudheer313/week12-Employee-Tracker<br>
+[Github URL here] https://github.com/sudheer313/week12-Employee-Tracker<br>
+[Live webpage URL git hub](https://sudheer313.github.io/week12-Employee-Tracker/)<br>
 
 ## Credits
 ask BCS</br>
