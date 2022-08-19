@@ -343,6 +343,8 @@ function employeeArray() {
   db.query(`SELECT * FROM employee`, function (err, emp_Results) {
     if (err) {
       console.log(err);
+
+      
     }
     for (let i = 0; i < emp_Results.length; i++) {
       var data = {
