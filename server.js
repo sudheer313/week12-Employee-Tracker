@@ -33,7 +33,7 @@ const runEmployee = () => {
         "add department",
         "Add Role",
         "add employee",
-        "updateEmployeeRole",
+        "updateEmployee",
         "Exit",
       ],
     })
@@ -61,7 +61,7 @@ const runEmployee = () => {
         case "Add Department":
           addDepartment_func();
           break;
-        case "updateEmployeeRole":
+        case "updateEmployee":
           updateEmployee_role();
           break;
         case "Exit":
@@ -114,18 +114,21 @@ const viewDepartments = () => {
 //view roles
 const viewRoles = () => {
   console.log("view all roles");
-  db.query(`select roles.id,roles.title as title, 
+  db.query(
+    `select roles.id,roles.title as title, 
   department.name as department, roles.salary 
   from roles inner join department 
-  on roles.department_id=department.id `, (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    console.log(`
+  on roles.department_id=department.id `,
+    (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      console.log(`
       ----------------------------------------------------
       ----------------------------------------------------
       `);
-    runEmployee();
-  });
+      runEmployee();
+    }
+  );
 };
 // Add department
 
@@ -185,13 +188,21 @@ const addEmployee = () => {
       let roleId = answers.role;
       let managerId = answers.manager;
       db.query(
-        `INSERT INTO employee_db.employees SET ?`,
+        `INSERT INTO company_db.employee SET ?`,
         {
           first_name: answers.first_name,
           last_name: answers.last_name,
           manager_id: managerId,
-          role_id: roleId,
+          roles_id: roleId,
         },
+        /*[
+        
+            answers.first_name,
+            answers.last_name,
+            managerId,
+            roles_id,
+
+        ],*/
         function (err, results) {
           if (err) {
             console.log(err);
@@ -225,19 +236,18 @@ function selectRole() {
 
 //add role
 
-const addRole=()=>{
-  const dep_Array=[];
+const addRole = () => {
+  const dep_Array = [];
   db.query(
     `select department.id, department.name as department from department`,
-    function(err,results){
-      if(err){
+    function (err, results) {
+      if (err) {
         console.log(err);
       }
-      results.forEach(function(i){
-        const department={
-          name:i.department,
-          value:i.id,
-
+      results.forEach(function (i) {
+        const department = {
+          name: i.department,
+          value: i.id,
         };
         dep_Array.push(department);
       });
@@ -245,8 +255,8 @@ const addRole=()=>{
       role();
     }
   );
-const role=()=>{
-  inquirer
+  const role = () => {
+    inquirer
       .prompt([
         {
           type: "input",
@@ -281,8 +291,8 @@ const role=()=>{
           }
         );
       });
-}
-}
+  };
+};
 
 //function to select manager()
 
@@ -303,7 +313,7 @@ function selectManager() {
   return managerArray;
 }
 
-//update employee Role
+//update employee 
 const updateEmployee_role = () => {
   inquirer
     .prompt([
@@ -324,14 +334,16 @@ const updateEmployee_role = () => {
       let new_roleId = answers.role;
 
       db.query(
-        `UPDATE employee SET roles_id = ? WHERE id = ?`,
+        `UPDATE employee
+         SET roles_id = ? WHERE id = ?`,
         [new_roleId, answers.id],
         function (err, results) {
           if (err) {
             console.log(err);
           }
+          console.table (results);
 
-          console.log("Succcessfully updated employee role to the database");
+          console.log(`Succcessfully updated ${new_roleId} employee role to the database`);
           runEmployee();
         }
       );
@@ -343,8 +355,6 @@ function employeeArray() {
   db.query(`SELECT * FROM employee`, function (err, emp_Results) {
     if (err) {
       console.log(err);
-
-      
     }
     for (let i = 0; i < emp_Results.length; i++) {
       var data = {
@@ -357,3 +367,7 @@ function employeeArray() {
   return employeeArr;
 }
 employeeArray();
+//ask BCS
+//referred https://www.w3schools.com/mySQl/default.asp
+//referred from https://github.com/ashachakre0906/note-taker
+//refrerred from https://github.com/kunalc156/12-Employee-Tracker-Kunal
